@@ -19,7 +19,8 @@ setup(
     maintainer = "Keith F Prussing",
     maintainer_email = "kprussing74@gmail.com",
 
-    url="https://github.com/kprussing/pandoc-div2env",
+    url = "https://github.com/kprussing/pandoc-div2env",
+    dowload_url = "https://github.com/kprussing/pandoc-div2env/releases",
     license = "MIT",
 
     install_requires = ["panflute >= 1.11.0"],
