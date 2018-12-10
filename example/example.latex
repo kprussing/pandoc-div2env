@@ -1,0 +1,33 @@
+\hypertarget{a-test-document}{%
+\section{A test document}\label{a-test-document}}
+
+Here we have an example document.
+
+\hypertarget{a-section}{%
+\subsection{A section}\label{a-section}}
+
+Our main goal is to convert a \texttt{div} with the
+\href{https://johnresig.com/blog/html-5-data-attributes/}{data
+attribute} into a \texttt{\textbackslash{}LaTeX} environment. We want to
+find only \texttt{div}s with the
+\texttt{data-environment=({[}\textbackslash{}w-{]}+)} (in quotes if the
+environment contains spaces) and convert those to
+\texttt{\textbackslash{}LaTeX} environments.
+
+\begin{example}%
+For example, this should be in an \texttt{example} environment.%
+\end{example}
+
+And this should not.
+
+\begin{with space}%
+An environment with a space in the name!%
+\end{with space}
+
+\begin{arguments}{one}{two}%
+And this one has arguments.%
+\end{arguments}
+
+\begin{optional}[here's,another,example]%
+How about keyword arguments?%
+\end{optional}

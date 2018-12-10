@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import os
+
+env = Environment(ENV=os.environ)
+
+env.Command("example.latex", "example.md",
+            "pandoc --filter pandoc-div2env $SOURCE -t latex -o $TARGET")
+
