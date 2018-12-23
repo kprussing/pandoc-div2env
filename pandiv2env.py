@@ -33,7 +33,7 @@ def div2env(elem, doc, debug=False):
             panflute.debug("begin = '{0!s}'".format(begin))
             panflute.debug("end = '{0!s}'".format(end))
 
-        if getattr(elem.content[0], "content", False):
+        if not getattr(elem.content[0], "content", False):
             begin = panflute.RawBlock(begin.text, format="latex")
             end = panflute.RawBlock(end.text, format="latex")
             elem = panflute.Div(begin, *elem.content, end)
