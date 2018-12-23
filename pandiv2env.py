@@ -33,10 +33,25 @@ def div2env(elem, doc, debug=False):
             panflute.debug("begin = '{0!s}'".format(begin))
             panflute.debug("end = '{0!s}'".format(end))
 
-        elem.content[0] = panflute.Para(begin, *elem.content[0].content)
-        elem.content[-1] = panflute.Para(*elem.content[-1].content, end)
+        if type(elem) == panflute.CodeBlock:
+            begin = panflute.RawBlock(begin.text, format="latex")
+            end = panflute.RawBlock(end.text, format="latex")
+            for ext in ("", "-args", "-keyword"):
+                elem.attributes.pop("data-environment" + ext, None)
+
+            elem = panflute.Div(begin, elem, end)
+        elif type(elem.content[0]) == panflute.CodeBlock:
+            begin = panflute.RawBlock(begin.text, format="latex")
+            end = panflute.RawBlock(end.text, format="latex")
+            elem = panflute.Div(begin, *elem.content, end)
+        else:
+            elem.content[0] = panflute.Para(begin,
+                                            *elem.content[0].content)
+            elem.content[-1] = panflute.Para(*elem.content[-1].content,
+                                             end)
+
         if debug:
-            panflute.debug("content = '{0!s}'".format(elem.content[0]))
+            panflute.debug("content = '{0!s}'".format(elem.content))
 
         return elem
 
