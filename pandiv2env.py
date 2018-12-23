@@ -3,7 +3,7 @@
 import panflute
 
 def div2env(elem, doc, debug=False):
-    if type(elem) == panflute.Div or doc.format in ["latex", "beamer"]:
+    if type(elem) == panflute.Div and doc.format in ["latex", "beamer"]:
         attr = getattr(elem, "attributes", None)
         if not attr:
             return
@@ -33,14 +33,7 @@ def div2env(elem, doc, debug=False):
             panflute.debug("begin = '{0!s}'".format(begin))
             panflute.debug("end = '{0!s}'".format(end))
 
-        if type(elem) == panflute.CodeBlock:
-            begin = panflute.RawBlock(begin.text, format="latex")
-            end = panflute.RawBlock(end.text, format="latex")
-            for ext in ("", "-args", "-keyword"):
-                elem.attributes.pop("data-environment" + ext, None)
-
-            elem = panflute.Div(begin, elem, end)
-        elif type(elem.content[0]) == panflute.CodeBlock:
+        if getattr(elem.content[0], "content", False):
             begin = panflute.RawBlock(begin.text, format="latex")
             end = panflute.RawBlock(end.text, format="latex")
             elem = panflute.Div(begin, *elem.content, end)
